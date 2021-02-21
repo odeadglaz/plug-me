@@ -1,0 +1,28 @@
+node_modules
+configuration/routes*
+dist
+npm-debug*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Sublime
+*.sublime-workspace
+*.sublime-project
+
+# VS
+.vscode
+
+# github
+id_rsa
+.cache
+.DS_Store
+
+# package-lock.json
+package-lock.json

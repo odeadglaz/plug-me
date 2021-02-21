@@ -1,0 +1,25 @@
+node_modules
+configuration/routes*
+template
+npm-debug*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Sublime
+*.sublime-workspace
+*.sublime-project
+
+# VS
+.vscode
+
+# github
+id_rsa
+.cache
+.DS_Store
