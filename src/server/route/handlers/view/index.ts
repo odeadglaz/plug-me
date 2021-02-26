@@ -1,9 +1,12 @@
-import { Context } from 'koa';
+import {
+    Request,
+    Response
+} from 'express';
 
 const wait = () => new Promise(resolve => setTimeout(resolve, 1000));
 
-export const handler = async(ctx: Context) => {
+export const handler = async(req: Request, res: Response) => {
     await wait();
 
-    ctx.body = 'Hello World \o/';
+    res.send('Hello World \o/');
 };

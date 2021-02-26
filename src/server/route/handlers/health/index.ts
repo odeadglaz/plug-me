@@ -1,5 +1,10 @@
-import { Context } from 'koa';
+import {
+    Request,
+    Response
+} from 'express';
 
-export const handler = (ctx: Context) => {
-    ctx.body = 'Health: OK';
+export const handler = (req: Request, res: Response) => {
+    res
+        .status(200)
+        .send('Im good!');
 };

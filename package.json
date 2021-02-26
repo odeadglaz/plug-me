@@ -4,7 +4,8 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "start": "nodemon --watch 'src/**/*' -e ts --exec node --inspect -r ts-node/register src/index.ts",
+    "start": "nodemon --watch 'src/**/*' -e ts --exec node -r ts-node/register src/index.ts",
+    "start-debug": "nodemon --watch 'src/**/*' -e ts --exec node --inspect -r ts-node/register src/index.ts",
     "build": "npm run clean && npm run build:app && npm run build:plugins",
     "build:app": "node_modules/typescript/bin/tsc -p tsconfig.build.json",
     "build:plugins": "webpack --config ./plugins/webpack.config.js",
@@ -17,17 +18,15 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@fiverr-private/obs": "^1.16.2",
-    "@koa/cors": "^3.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "failed-to-load": "0.0.1",
-    "koa": "^2.13.1",
-    "koa-router": "^10.0.0"
+    "webpack-assets-manifest": "^5.0.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.8",
     "@types/jest": "^26.0.15",
-    "@types/koa": "^2.13.0",
-    "@types/koa-router": "^7.4.1",
-    "@types/koa__cors": "^3.0.2",
     "@types/lodash": "^4.14.165",
     "@types/node": "^13.9.1",
     "@types/supertest": "^2.0.10",

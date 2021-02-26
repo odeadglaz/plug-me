@@ -1,8 +1,16 @@
-import Application from 'koa';
-import cors from '@koa/cors';
-import { routeTiming } from './routeTiming';
+import { Application } from 'express';
+import cors from 'cors';
+import { routeTiming, createErrorHandler } from '@fiverr-private/obs';
 
-export const register = (app: Application) => {
+export const before = (app: Application) => {
     app.use(cors());
-    app.use(routeTiming);
+    app.use(routeTiming('plugin_service'));
 };
+
+export const after = (app: Application) => {
+    const errorHandler = createErrorHandler({
+        fields: ['request_context']
+    });
+
+    app.use(errorHandler);
+}

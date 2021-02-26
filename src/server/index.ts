@@ -1,19 +1,25 @@
-import Koa from 'koa';
+import Express from 'express';
+import { logger } from '@fiverr-private/obs';
 import configuration from '../configuration';
+import * as globals from './globals';
 import * as routes from './route';
 import * as middleware from './middleware';
 
 class PluginApp {
-
     static start() {
-        const app = new Koa();
+        const app: Express.Application = Express();
 
-        middleware.register(app);
+        globals.register();
+        middleware.before(app);
         routes.register(app);
+        middleware.after(app);
 
-        app.listen(configuration.port);
+        app.set('etag', false);
+        app.listen(configuration.port, this.ready);
+    }
 
-        console.log(`Server running on port ${configuration.port}`);
+    static ready() {
+        logger.info(`Server running on port ${configuration.port}`);
     }
 }
 
