@@ -18,7 +18,7 @@ const getPluginPath = (plugin: string) => [
     process.cwd(),
     'dist',
     'plugins',
-    `${plugin}.js`
+    `${plugin}.latest.js`
 ].join('/');
 
 export const handler = (req: Request, res: Response, next: NextFunction) => {

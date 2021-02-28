@@ -19,6 +19,7 @@
   "dependencies": {
     "@fiverr-private/obs": "^1.16.2",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "failed-to-load": "0.0.1",
     "webpack-assets-manifest": "^5.0.1"

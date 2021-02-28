@@ -7,10 +7,14 @@ const pluginsEntries = () => fs.readdirSync(
 )
     .filter((file) => file.isDirectory())
     .map((file) => file.name)
-    .reduce((acc, fileName) => ({
-        ...acc,
-        [fileName]: `${process.cwd()}/plugins/${fileName}/index.ts`
-    }), {});
+    .reduce((acc, fileName) => {
+        const pluginRoot = `${process.cwd()}/plugins/${fileName}`;
+        const { version } = require(`${pluginRoot}/config.json`);
+        return {
+            ...acc,
+            [`${fileName}.${version}`]: `${pluginRoot}/index.ts`
+        }
+    }, {});
 
 module.exports = {
     mode: 'production',
@@ -29,7 +33,7 @@ module.exports = {
     plugins: [
         new WebpackAssetsManifest({
             publicPath: true,
-            output: 'plugins.json'
+            output: 'plugins.manifest.json'
         })
     ],
     // loaders

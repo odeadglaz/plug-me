@@ -15,6 +15,7 @@ class PluginApp {
         middleware.after(app);
 
         app.set('etag', false);
+
         app.listen(configuration.port, this.ready);
     }
 
