@@ -8,7 +8,7 @@
     "start-debug": "nodemon --watch 'src/**/*' -e ts --exec node --inspect -r ts-node/register src/index.ts",
     "build": "npm run clean && npm run build:app && npm run build:plugins",
     "build:app": "node_modules/typescript/bin/tsc -p tsconfig.build.json",
-    "build:plugins": "webpack --config ./plugins/webpack.config.js",
+    "build:plugins": "webpack --config plugins/configuration/webpack/webpack.config.js",
     "test": "jest",
     "lint": "eslint src/ '*.{js,ts}' --quiet",
     "clean": "rm -rf dist/"
@@ -22,6 +22,7 @@
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "failed-to-load": "0.0.1",
+    "@fiverr-private/vendors-lodash": "^1.1.9",
     "webpack-assets-manifest": "^5.0.1"
   },
   "devDependencies": {

@@ -8,7 +8,7 @@ const getPluginsManifest = (): PluginManifest => {
         process.cwd(),
         'dist',
         'plugins',
-        'plugins.json'
+        'plugins.manifest.json'
     ].join('/');
 
     return require(manifestPath);
