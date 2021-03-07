@@ -26,6 +26,7 @@
     "webpack-assets-manifest": "^5.0.1"
   },
   "devDependencies": {
+    "@fiverr-private/fiverr_context": "^1.2.2",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.8",
     "@types/jest": "^26.0.15",
