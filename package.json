@@ -18,11 +18,12 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@fiverr-private/obs": "^1.16.2",
+    "@fiverr-private/vendors-lodash": "^1.1.9",
+    "@fiverr/i18n": "^1.8.3",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "failed-to-load": "0.0.1",
-    "@fiverr-private/vendors-lodash": "^1.1.9",
     "webpack-assets-manifest": "^5.0.1"
   },
   "devDependencies": {

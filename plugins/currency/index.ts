@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash';
 import { logger } from '@fiverr-private/obs';
 import { HttpPlugin, RequestDecorator, ResponseDecorator } from '../base/plugin';
-import {PollingAction} from '../base/decorators';
+import { PollingAction} from '../base/decorators';
 
 class CurrencyPlugin extends HttpPlugin {
     readonly name = 'currency';
@@ -15,7 +15,7 @@ class CurrencyPlugin extends HttpPlugin {
         this.currencies = currencies;
     }
 
-    decorateRequest = (decorator: RequestDecorator) => {
+    decorateRequest(decorator: RequestDecorator) {
         if (isEmpty(this.currencies)) {
             throw new Error('Empty currencies');
         }
@@ -24,7 +24,7 @@ class CurrencyPlugin extends HttpPlugin {
         decorator.decorate('currencies', this.currencies);
     };
 
-    decorateResponse = (decorator: ResponseDecorator) => {
+    decorateResponse(decorator: ResponseDecorator) {
         decorator.setHeader('X-Custom-Currencies', this.currencies.join(','))
     }
 }

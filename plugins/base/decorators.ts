@@ -21,17 +21,16 @@ const Expose = (name?: string) => (
     target: HttpPlugin,
     propertyKey: string
 ) => {
-    let value : unknown;
-
+    let value: unknown;
     const exposeUnder = name || propertyKey;
+
     Object.defineProperty(target, propertyKey, {
         get: function() {
             return value;
         },
-        set: function(newValue: unknown) {
-            value = newValue
-            console.log('Setting new val :', exposeUnder, newValue)
-            this.exposed[exposeUnder] = newValue;
+        set: function(newValue) {
+            value = newValue;
+            this.exposed[exposeUnder] = newValue
         }
     });
 }
