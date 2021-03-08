@@ -31,7 +31,7 @@ export abstract class HttpPlugin {
 
 export interface PluginDecorator extends RequestDecorator, ResponseDecorator {}
 
-export type PluginDecoratorAdapter<T, R> = (request: T, response: R) => PluginDecorator;
+export type PluginDecoratorAdapter<Request, Response> = (request: Request, response: Response) => PluginDecorator;
 
 type PluginConfig = { name: string; version?: string };
 
@@ -43,12 +43,12 @@ interface InvalidPluginAdapter extends Error {}
 interface InvalidPluginConfig extends Error {}
 interface PluginDoesNotExistsError extends Error {}
 
-export interface PluginCore<T, R> {
+export interface PluginCore<Request, Response> {
     initialize: (
         config: PluginsConfig,
-        decoratorAdapter: PluginDecoratorAdapter<T, R>
+        decoratorAdapter: PluginDecoratorAdapter<Request, Response>
     ) => void | InvalidPluginAdapter | InvalidPluginConfig;
     get:<P extends HttpPlugin> (name: string) => P | PluginDoesNotExistsError;
-    decorateRequest: (request: T, response: R) => void;
-    decorateResponse: (request: T, response: R) => void;
+    decorateRequest: (request: Request, response: Response) => void;
+    decorateResponse: (request: Request, response: Response) => void;
 }
