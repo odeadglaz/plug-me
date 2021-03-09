@@ -43,8 +43,11 @@ const PollingAction = (delay = 10000) => (
     const originalMethod = descriptor.value;
     let interval: any = null;
 
-    descriptor.value = function() {
+    descriptor.value = async function() {
         const action = originalMethod.bind(this);
+
+        await action();
+
         interval = setInterval(action, delay);
     }
 
