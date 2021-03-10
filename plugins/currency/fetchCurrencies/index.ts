@@ -1,5 +1,15 @@
 import axios from 'axios';
-import { Currency, LayoutCurrency } from './type';
+import { Currency } from '../types';
+
+interface LayoutCurrency {
+    id: number;
+    code: string;
+    symbol: string;
+    name: string;
+    template: string;
+    round_amount: number;
+    exchange_rate: string;
+}
 
 const LAYOUT_PHOENIX_URL = process.env.GENERAL_SERVICES_LAYOUT_PHOENIX_SERVICE;
 

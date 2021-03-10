@@ -2,7 +2,8 @@ import { isEmpty } from 'lodash';
 import { logger } from '@fiverr-private/obs';
 import { HttpPlugin, RequestDecorator, ResponseDecorator } from '../base/plugin';
 import { PollingAction} from '../base/decorators';
-import { default as fetchCurrencies, Currency } from './fetchCurrencies';
+import fetchCurrencies from './fetchCurrencies';
+import { Currency } from './types';
 
 class CurrencyPlugin extends HttpPlugin {
     readonly name = 'currency';

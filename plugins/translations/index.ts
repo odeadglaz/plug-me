@@ -2,9 +2,7 @@
 import I18n from '@fiverr/i18n';
 import { HttpPlugin, RequestDecorator } from '../base/plugin';
 import { Expose } from '../base/decorators';
-
-type Translation = { [name: string]: string };
-type TranslationsMap = { [locale: string]: Translation };
+import { TranslationsMap } from './types';
 
 class TranslationsPlugin extends HttpPlugin {
     readonly name = 'translations';
