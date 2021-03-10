@@ -23,10 +23,10 @@ export interface ResponseDecorator extends BaseDecorator {
 export abstract class HttpPlugin {
     abstract name: string;
     exposed: UnknownObject = {};
-    init(): void {};
-    decorateRequest(decorator: RequestDecorator): void {};
-    decorateResponse(decorator: ResponseDecorator): void {};
-    clear(): void {};
+    abstract init(): void;
+    decorateRequest?(decorator: RequestDecorator): void;
+    decorateResponse?(decorator: ResponseDecorator): void;
+    clear?(): void;
 }
 
 export interface PluginDecorator extends RequestDecorator, ResponseDecorator {}
