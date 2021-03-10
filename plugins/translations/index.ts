@@ -38,4 +38,6 @@ class TranslationsPlugin extends HttpPlugin {
     };
 }
 
-export default TranslationsPlugin;
+export {
+    TranslationsPlugin
+};

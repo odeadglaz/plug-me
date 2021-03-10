@@ -5,6 +5,3 @@ export interface Currency {
     forceRound: boolean;
     forceRoundFromAmount: number;
 }
-
-export interface CurrenciesPlugins {
-}

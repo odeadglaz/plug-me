@@ -1,8 +1,8 @@
 import { isEmpty } from 'lodash';
 import { logger } from '@fiverr-private/obs';
-import { HttpPlugin, RequestDecorator, ResponseDecorator } from '../base/plugin';
+import { HttpPlugin, RequestDecorator } from '../base/plugin';
 import { PollingAction} from '../base/decorators';
-import fetchCurrencies from './fetchCurrencies';
+import { fetchCurrencies } from './fetchCurrencies';
 import { Currency } from './types';
 
 class CurrencyPlugin extends HttpPlugin {
@@ -28,10 +28,8 @@ class CurrencyPlugin extends HttpPlugin {
         logger.info('Decorating request with currency', { matchedCurrency });
         decorator.decorate('sessionCurrency', matchedCurrency);
     };
-
-    decorateResponse(decorator: ResponseDecorator) {
-        decorator.setHeader('X-Custom-Currencies', this.currencies.join(','))
-    }
 }
 
-export default CurrencyPlugin;
+export {
+    CurrencyPlugin
+};

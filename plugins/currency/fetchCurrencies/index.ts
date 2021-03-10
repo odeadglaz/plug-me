@@ -34,4 +34,4 @@ const fetchCurrencies = async(): Promise<Currency[]> => {
     return formatCurrencies(data.currencies);
 }
 
-export default fetchCurrencies;
+export { fetchCurrencies };
