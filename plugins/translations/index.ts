@@ -1,14 +1,14 @@
 // @ts-ignore
-import I18n from '@fiverr/i18n';
+import I18nInstance from '@fiverr/i18n';
 import { HttpPlugin, RequestDecorator } from '../base/plugin';
 import { Expose } from '../base/decorators';
-import { TranslationsMap } from './types';
+import { TranslationsMap, I18n } from './types';
 
 class TranslationsPlugin extends HttpPlugin {
     readonly name = 'translations';
 
     @Expose()
-    i18n = new I18n();
+    i18n: I18n = new I18nInstance();
 
     @Expose()
     translations: TranslationsMap = {};
