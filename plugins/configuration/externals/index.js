@@ -33,8 +33,6 @@ const getDependencyProperty = (property, list = allVendorsPackages) => list.redu
 
 const externals = getDependencyProperty('externals');
 
-console.log(externals);
-
 module.exports = {
     ...externals,
     ...createVendor('@fiverr-private/obs')
