@@ -1,9 +1,11 @@
 const path = require( 'path' );
 const fs = require('fs');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
+const ExposedTypesPlugin = require('./ExposedTypesPlugin');
 
 const excludedDirectories = ['configuration', 'base'];
 const root = `${process.cwd()}/plugins`;
+const plugins = [];
 
 const pluginsEntries = () => fs.readdirSync(
     path.resolve(root), { withFileTypes: true }
@@ -12,6 +14,7 @@ const pluginsEntries = () => fs.readdirSync(
     .filter((file) => !excludedDirectories.includes(file.name))
     .map((file) => file.name)
     .reduce((acc, fileName) => {
+        plugins.push(fileName);
         const pluginRoot = `${root}/${fileName}`;
         try {
             const { version } = require(`${pluginRoot}/config.json`);
@@ -30,8 +33,8 @@ module.exports = {
     target: 'node',
     entry: pluginsEntries(),
     output: {
-        path: path.resolve(root, '../dist/plugins' ),
-        filename: '[name].js',
+        path: path.resolve(root, '../dist' ),
+        filename: 'plugins/[name].js',
         libraryTarget: 'umd',
         globalObject: "Function('return this')()"
     },
@@ -44,6 +47,11 @@ module.exports = {
         new WebpackAssetsManifest({
             publicPath: true,
             output: 'plugins.manifest.json'
+        }),
+        new ExposedTypesPlugin({
+            output: path.resolve(root, '../dist' ),
+            filename: 'exposed.generated',
+            typesEntryName: 'exposed.ts',
         })
     ],
     // loaders
