@@ -1,13 +1,14 @@
 import { isEmpty } from 'lodash';
 import { logger } from '@fiverr-private/obs';
 import { IchorPlugin, RequestDecorator } from '../../base/ichor.base';
-import { PollingAction} from '../base/decorators';
+import { PollingAction, Expose } from '../base/decorators';
 import { fetchCurrencies } from './fetchCurrencies';
 import { Currency } from './types';
 
-class CurrencyPlugin extends IchorPlugin {
+export default class CurrencyPlugin extends IchorPlugin {
     readonly name = 'currency';
 
+    @Expose()
     currencies: Currency[] = [];
 
     @PollingAction(60 * 1000)
@@ -29,7 +30,3 @@ class CurrencyPlugin extends IchorPlugin {
         decorator.decorate('sessionCurrency', matchedCurrency);
     };
 }
-
-export {
-    CurrencyPlugin
-};

@@ -4,7 +4,7 @@ import { IchorPlugin, RequestDecorator } from '../../base/ichor.base';
 import { Expose } from '../base/decorators';
 import { TranslationsMap, I18n } from './types';
 
-class TranslationsPlugin extends IchorPlugin {
+export default class TranslationsPlugin extends IchorPlugin {
     readonly name = 'translations';
 
     @Expose()
@@ -36,8 +36,4 @@ class TranslationsPlugin extends IchorPlugin {
 
         decorator.decorate('localizedTranslations', this.translations[locale]);
     };
-}
-
-export {
-    TranslationsPlugin
 };
