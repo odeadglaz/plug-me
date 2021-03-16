@@ -1,5 +1,6 @@
 import Express from 'express';
 import { logger } from '@fiverr-private/obs';
+import PluginCoreTest from '@fiverr-private/plugin_core';
 import configuration from '../configuration';
 import * as globals from './globals';
 import * as routes from './route';
@@ -13,6 +14,8 @@ class PluginApp {
         middleware.before(app);
         routes.register(app);
         middleware.after(app);
+
+        PluginCoreTest();
 
         app.set('etag', false);
 

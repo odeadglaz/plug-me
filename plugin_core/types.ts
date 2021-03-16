@@ -1,30 +1,30 @@
 import {
-    Ichor,
+    NodePlugin,
     RequestDecorator,
     ResponseDecorator
-} from '../base/ichor.base';
+} from '../base/plugin.base';
 
-export interface IchorDecorator extends RequestDecorator, ResponseDecorator {}
+export interface PluginDecorator extends RequestDecorator, ResponseDecorator {}
 
-export type IchorDecoratorAdapter<Request, Response> = (request: Request, response: Response) => IchorDecorator;
+export type PluginDecoratorAdapter<Request, Response> = (request: Request, response: Response) => PluginDecorator;
 
-type IchorConfig = { name: string; version?: string };
+type PluginConfig = { name: string; version?: string };
 
-interface IchorsConfig {
-    plugins: IchorConfig[]
+interface PluginsConfig {
+    plugins: PluginConfig[]
 }
 
-interface InvalidIchorAdapter extends Error {}
-interface InvalidIchorConfig extends Error {}
-interface IchorDoesNotExistsError extends Error {}
+interface InvalidPluginAdapter extends Error {}
+interface InvalidPluginConfig extends Error {}
+interface PluginDoesNotExistsError extends Error {}
 
-export interface IchorCore<Request, Response> {
+export interface PluginCore<Request, Response> {
     initialize: (
-        config: IchorsConfig,
-        decoratorAdapter: IchorDecoratorAdapter<Request, Response>
-    ) => void | InvalidIchorAdapter | InvalidIchorConfig;
-    ichors: Ichor[];
-    get:<P extends Ichor> (name: string) => Partial<P> | IchorDoesNotExistsError;
+        config: PluginsConfig,
+        decoratorAdapter: PluginDecoratorAdapter<Request, Response>
+    ) => void | InvalidPluginAdapter | InvalidPluginConfig;
+    plugins: NodePlugin[];
+    get:<P extends NodePlugin> (name: string) => Partial<P> | PluginDoesNotExistsError;
     decorateRequest: (request: Request, response: Response) => void;
     decorateResponse: (request: Request, response: Response) => void;
 }
