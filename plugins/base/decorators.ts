@@ -1,4 +1,4 @@
-import { Ichor } from '../../base/ichor.base';
+import { NodePlugin } from '../../base/plugin.base';
 
 const MonitorTiming = (metric: string) => (
     target: unknown,
@@ -18,7 +18,7 @@ const MonitorTiming = (metric: string) => (
 };
 
 const Expose = (name?: string) => (
-    target: Ichor,
+    target: NodePlugin,
     propertyKey: string
 ) => {
     let value: unknown;
@@ -36,7 +36,7 @@ const Expose = (name?: string) => (
 }
 
 const PollingAction = (delay = 10000) => (
-    target: Ichor,
+    target: NodePlugin,
     propertyKey: string,
     descriptor: PropertyDescriptor
 ) => {
