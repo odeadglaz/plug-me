@@ -86,7 +86,7 @@ const processDeclarationAsset = (asset) => {
 /**
  * @typedef {Object} ExposedTypesPluginOptions
  * @property {String} output - The output folder path.
- * @property {String} filename - The generated file name.
+ * @property {String} [filename] - The generated file name.
  * @property {String} typesEntryName - The declaration types entry file name.
  */
 
@@ -98,9 +98,9 @@ class ExposedTypesPlugin {
      */
     constructor(options = {}) {
         this.output = options.output;
-        this.filename = options.filename;
-        this.typesEntryName = options.typesEntryName
-            .replace('ts', DECLARATION_FILE_SUFFIX);
+
+        this.typesEntryName = `${options.typesEntryName}.${DECLARATION_FILE_SUFFIX}`;
+        this.filename = options.filename ? `${options.filename}.${DECLARATION_FILE_SUFFIX}` : this.typesEntryName;
     }
 
     apply(compiler) {
@@ -141,7 +141,7 @@ class ExposedTypesPlugin {
     }
 
     writeEntry() {
-        const outputFilePath = `${this.output}/${this.typesEntryName}`
+        const outputFilePath = `${this.output}/${this.filename}`
 
         fs.writeFileSync(outputFilePath, this.combinedDeclarations, 'utf-8');
     }

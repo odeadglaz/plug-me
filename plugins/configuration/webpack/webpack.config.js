@@ -48,7 +48,8 @@ module.exports = {
         }),
         new ExposedTypesPlugin({
             output: path.resolve(root, '../dist/plugins'),
-            typesEntryName: 'exposed.ts',
+            filename: 'exposed.generated',
+            typesEntryName: 'exposed',
         })
     ],
     // loaders
