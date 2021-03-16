@@ -31,8 +31,8 @@ module.exports = {
     target: 'node',
     entry: pluginsEntries(),
     output: {
-        path: path.resolve(root, '../dist' ),
-        filename: 'plugins/[name].js',
+        path: path.resolve(root, '../dist/plugins' ),
+        filename: '[name].js',
         libraryTarget: 'umd',
         globalObject: "Function('return this')()"
     },
@@ -46,7 +46,10 @@ module.exports = {
             publicPath: true,
             output: 'plugins.manifest.json'
         }),
-
+        new ExposedTypesPlugin({
+            output: path.resolve(root, '../dist/plugins'),
+            typesEntryName: 'exposed.ts',
+        })
     ],
     // loaders
     module: {

@@ -111,6 +111,11 @@ class ExposedTypesPlugin {
                 callback();
             }
         );
+
+        compiler.hooks.done.tap(
+            PLUGIN_NAME,
+            () => this.writeEntry()
+        );
     }
 
     generateDeclaration(assets) {
@@ -129,13 +134,16 @@ class ExposedTypesPlugin {
         const declarationContent = processDeclarationAsset(exposedDeclaration);
 
         // Adding external imports
-        const combinedContent = [
+        this.combinedDeclarations = [
             ...externalImports,
             declarationContent
-        ].join('\n')
+        ].join('\n');
+    }
 
-        const outputFilePath = `${this.output}/${this.filename}.${DECLARATION_FILE_SUFFIX}`
-        fs.writeFileSync(outputFilePath, combinedContent, 'utf-8');
+    writeEntry() {
+        const outputFilePath = `${this.output}/${this.typesEntryName}`
+
+        fs.writeFileSync(outputFilePath, this.combinedDeclarations, 'utf-8');
     }
 }
 
