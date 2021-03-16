@@ -1,11 +1,11 @@
 import { isEmpty } from 'lodash';
 import { logger } from '@fiverr-private/obs';
-import { IchorPlugin, RequestDecorator } from '../../base/ichor.base';
+import { Ichor, RequestDecorator } from '../../base/ichor.base';
 import { PollingAction, Expose } from '../base/decorators';
 import { fetchCurrencies } from './fetchCurrencies';
 import { Currency } from './types';
 
-export default class CurrencyPlugin extends IchorPlugin {
+export default class CurrencyPlugin extends Ichor {
     readonly name = 'currency';
 
     @Expose()

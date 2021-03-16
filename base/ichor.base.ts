@@ -20,7 +20,7 @@ export interface ResponseDecorator extends BaseDecorator {
     setCookie: (name: string, value: string, options: DecoratorCookieOptions) => void;
 }
 
-export abstract class IchorPlugin {
+export abstract class Ichor {
     abstract name: string;
     exposed: UnknownObject = {};
     abstract init(): void;

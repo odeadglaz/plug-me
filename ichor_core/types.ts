@@ -1,5 +1,5 @@
 import {
-    IchorPlugin,
+    Ichor,
     RequestDecorator,
     ResponseDecorator
 } from '../base/ichor.base';
@@ -23,8 +23,8 @@ export interface IchorCore<Request, Response> {
         config: IchorsConfig,
         decoratorAdapter: IchorDecoratorAdapter<Request, Response>
     ) => void | InvalidIchorAdapter | InvalidIchorConfig;
-    plugins: IchorPlugin[];
-    get:<P extends IchorPlugin> (name: string) => Partial<P> | IchorDoesNotExistsError;
+    ichors: Ichor[];
+    get:<P extends Ichor> (name: string) => Partial<P> | IchorDoesNotExistsError;
     decorateRequest: (request: Request, response: Response) => void;
     decorateResponse: (request: Request, response: Response) => void;
 }
