@@ -7,7 +7,6 @@ const getPluginsManifest = (): PluginManifest => {
     const manifestPath =  [
         process.cwd(),
         'dist',
-        'plugins',
         'plugins.manifest.json'
     ].join('/');
 

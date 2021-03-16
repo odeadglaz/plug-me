@@ -120,6 +120,7 @@ class ExposedTypesPlugin {
                 declarationFiles[fileName] = assetSource;
             });
 
+        console.log(Object.keys(declarationFiles));
         if (!declarationFiles[this.typesEntryName]) {
             throw new Error(`Could not find exposed declaration file under complied assets - ${this.typesEntryName}`);
         }

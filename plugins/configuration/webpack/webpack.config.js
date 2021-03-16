@@ -46,11 +46,7 @@ module.exports = {
             publicPath: true,
             output: 'plugins.manifest.json'
         }),
-        new ExposedTypesPlugin({
-            output: path.resolve(root, '../dist' ),
-            filename: 'exposed.generated',
-            typesEntryName: 'exposed.ts',
-        })
+
     ],
     // loaders
     module: {

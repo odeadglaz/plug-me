@@ -1,11 +1,11 @@
 import { isEmpty } from 'lodash';
 import { logger } from '@fiverr-private/obs';
-import { HttpPlugin, RequestDecorator } from '../base/plugin';
+import { IchorPlugin, RequestDecorator } from '../../base/ichor.base';
 import { PollingAction} from '../base/decorators';
 import { fetchCurrencies } from './fetchCurrencies';
 import { Currency } from './types';
 
-class CurrencyPlugin extends HttpPlugin {
+class CurrencyPlugin extends IchorPlugin {
     readonly name = 'currency';
 
     currencies: Currency[] = [];
