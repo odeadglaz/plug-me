@@ -1,10 +1,10 @@
 // @ts-ignore
 import I18nInstance from '@fiverr/i18n';
-import { HttpPlugin, RequestDecorator } from '../base/plugin';
+import { IchorPlugin, RequestDecorator } from '../../base/ichor.base';
 import { Expose } from '../base/decorators';
 import { TranslationsMap, I18n } from './types';
 
-class TranslationsPlugin extends HttpPlugin {
+class TranslationsPlugin extends IchorPlugin {
     readonly name = 'translations';
 
     @Expose()

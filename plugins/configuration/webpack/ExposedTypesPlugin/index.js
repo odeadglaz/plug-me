@@ -86,7 +86,7 @@ const processDeclarationAsset = (asset) => {
 /**
  * @typedef {Object} ExposedTypesPluginOptions
  * @property {String} output - The output folder path.
- * @property {String} filename - The generated file name.
+ * @property {String} [filename] - The generated file name.
  * @property {String} typesEntryName - The declaration types entry file name.
  */
 
@@ -98,9 +98,9 @@ class ExposedTypesPlugin {
      */
     constructor(options = {}) {
         this.output = options.output;
-        this.filename = options.filename;
-        this.typesEntryName = options.typesEntryName
-            .replace('ts', DECLARATION_FILE_SUFFIX);
+
+        this.typesEntryName = `${options.typesEntryName}.${DECLARATION_FILE_SUFFIX}`;
+        this.filename = options.filename ? `${options.filename}.${DECLARATION_FILE_SUFFIX}` : this.typesEntryName;
     }
 
     apply(compiler) {
@@ -111,6 +111,11 @@ class ExposedTypesPlugin {
                 callback();
             }
         );
+
+        compiler.hooks.done.tap(
+            PLUGIN_NAME,
+            () => this.writeEntry()
+        );
     }
 
     generateDeclaration(assets) {
@@ -120,6 +125,7 @@ class ExposedTypesPlugin {
                 declarationFiles[fileName] = assetSource;
             });
 
+        console.log(Object.keys(declarationFiles));
         if (!declarationFiles[this.typesEntryName]) {
             throw new Error(`Could not find exposed declaration file under complied assets - ${this.typesEntryName}`);
         }
@@ -128,13 +134,16 @@ class ExposedTypesPlugin {
         const declarationContent = processDeclarationAsset(exposedDeclaration);
 
         // Adding external imports
-        const combinedContent = [
+        this.combinedDeclarations = [
             ...externalImports,
             declarationContent
-        ].join('\n')
+        ].join('\n');
+    }
 
-        const outputFilePath = `${this.output}/${this.filename}.${DECLARATION_FILE_SUFFIX}`
-        fs.writeFileSync(outputFilePath, combinedContent, 'utf-8');
+    writeEntry() {
+        const outputFilePath = `${this.output}/${this.filename}`
+
+        fs.writeFileSync(outputFilePath, this.combinedDeclarations, 'utf-8');
     }
 }
 
