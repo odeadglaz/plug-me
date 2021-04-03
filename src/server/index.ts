@@ -16,6 +16,7 @@ class PluginApp {
         middleware.after(app);
 
         PluginCoreTest();
+        PluginCoreTest();
 
         app.set('etag', false);
 

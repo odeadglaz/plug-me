@@ -1,5 +1,6 @@
 const path = require( 'path' );
 const fs = require('fs');
+const webpack =  require('webpack');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const ExposedTypesPlugin = require('./ExposedTypesPlugin');
 
@@ -26,6 +27,8 @@ const pluginsEntries = () => fs.readdirSync(
         }
     }, {});
 
+const pluginsInternalVersion = process.env.CIRCLE_SHA1 || '5fa3b9'
+
 module.exports = {
     mode: 'production',
     target: 'node',
@@ -45,6 +48,9 @@ module.exports = {
         new WebpackAssetsManifest({
             publicPath: true,
             output: 'plugins.manifest.json'
+        }),
+        new webpack.DefinePlugin({
+            PLUGINS_INTERNAL_VERSION: JSON.stringify(pluginsInternalVersion)
         }),
         new ExposedTypesPlugin({
             output: path.resolve(root, '../dist/plugins'),
